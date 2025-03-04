@@ -108,4 +108,3 @@ export type AuthenticationState = {
     keys: SignalKeyStore;
 };
 export {};
-          

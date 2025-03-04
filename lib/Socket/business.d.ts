@@ -1,5 +1,4 @@
 /// <reference types="node" />
-//HI BANG AKU KAGE GANTENG
 import { GetCatalogOptions, ProductCreate, ProductUpdate, SocketConfig } from '../Types';
 import { BinaryNode } from '../WABinary';
 export declare const makeBusinessSocket: (config: SocketConfig) => {

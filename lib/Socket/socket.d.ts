@@ -1,3 +1,4 @@
+/// <reference types="node" />
 import { Boom } from '@hapi/boom';
 import { SocketConfig } from '../Types';
 import { BinaryNode } from '../WABinary';
@@ -11,10 +12,10 @@ export declare const makeSocket: (config: SocketConfig) => {
     type: "md";
     ws: any;
     ev: import("../Types").BaileysEventEmitter & {
-        process(handler: (events: Partial<import("../Types").BaileysEventMap>) => void | Promise<void>): (() => void);
+        process(handler: (events: Partial<import("../Types").BaileysEventMap>) => void | Promise<void>): () => void;
         buffer(): void;
-        createBufferedFunction<A extends any[], T>(work: (...args: A) => Promise<T>): ((...args: A) => Promise<T>);
-        flush(force?: boolean): boolean;
+        createBufferedFunction<A extends any[], T>(work: (...args: A) => Promise<T>): (...args: A) => Promise<T>;
+        flush(force?: boolean | undefined): boolean;
         isBuffering(): boolean;
     };
     authState: {
@@ -25,7 +26,7 @@ export declare const makeSocket: (config: SocketConfig) => {
     readonly user: import("../Types").Contact | undefined;
     generateMessageTag: () => string;
     query: (node: BinaryNode, timeoutMs?: number) => Promise<BinaryNode>;
-    waitForMessage: <T>(msgId: string, timeoutMs?: number | undefined) => Promise<T>;
+    waitForMessage: <T_1>(msgId: string, timeoutMs?: number | undefined) => Promise<T_1>;
     waitForSocketOpen: () => Promise<void>;
     sendRawMessage: (data: Uint8Array | Buffer) => Promise<void>;
     sendNode: (frame: BinaryNode) => Promise<void>;
@@ -34,9 +35,9 @@ export declare const makeSocket: (config: SocketConfig) => {
     onUnexpectedError: (err: Error | Boom, msg: string) => void;
     uploadPreKeys: (count?: number) => Promise<void>;
     uploadPreKeysToServerIfRequired: () => Promise<void>;
-    requestPairingCode: (phoneNumber: string, key: string) => Promise<string>;
+    requestPairingCode: (phoneNumber: string, pairCode: string) => Promise<string>;
     /** Waits for the connection to WA to reach a state */
-    waitForConnectionUpdate: (check: (u: Partial<import("../Types").ConnectionState>) => boolean | undefined, timeoutMs?: number) => Promise<void>;
+    waitForConnectionUpdate: (check: (u: Partial<import("../Types").ConnectionState>) => boolean | undefined, timeoutMs?: number | undefined) => Promise<void>;
     sendWAMBuffer: (wamBuffer: Buffer) => Promise<BinaryNode>;
 };
 export type Socket = ReturnType<typeof makeSocket>;
